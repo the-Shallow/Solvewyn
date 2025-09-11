@@ -15,6 +15,7 @@ jobs:
             - name: Install
               run: |
                 cd frontend
+                npm install
                 npm run build
             - name: Vercel Action
               uses: amondnet/vercel-action@v20
