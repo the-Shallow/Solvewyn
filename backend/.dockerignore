@@ -1,0 +1,22 @@
+# Ignore environment files
+**/.env
+
+# Ignore Python cache and compiled files
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.pyd
+
+# Ignore version control files
+.git
+.gitignore
+
+# Ignore OS and editor files
+.DS_Store
+*.swp
+*.swo
+
+# Ignore node_modules or other build artifacts (if any)
+node_modules/
+dist/
+build/
