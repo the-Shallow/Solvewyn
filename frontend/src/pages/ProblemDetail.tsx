@@ -10,7 +10,7 @@ import {oneDark} from "react-syntax-highlighter/dist/esm/styles/prism";
 import axios from "axios";
 import { useAuth } from "@/context/AuthContext";
 import { htmlToText } from "html-to-text";
-
+import { API_BASE_URL } from "../config";
 
 type Submission = {
     id:string,
@@ -107,7 +107,7 @@ const ProblemDetail = () => {
     useEffect(() => {
         const fetchProblem = async () => {
             console.log(user);
-            const res = await axios.get(`http://localhost:8000/submissions/${id}/${user._id}`, {
+            const res = await axios.get(`${API_BASE_URL}/submissions/${id}/${user._id}`, {
                 withCredentials:true,
             });
 
@@ -128,7 +128,7 @@ const ProblemDetail = () => {
         if(showAISuggestions && id && !aiAnalysisCache[id]){
             const fetchAIAnalysis = async () => {
                 try{
-                    const res = await axios.get(`http://localhost:8000/submissions/ai/${id}/${user._id}`,{
+                    const res = await axios.get(`${API_BASE_URL}/submissions/ai/${id}/${user._id}`,{
                         withCredentials:true
                     });
 

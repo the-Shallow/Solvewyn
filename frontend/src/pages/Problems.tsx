@@ -11,6 +11,7 @@ import { Search, Clock, MemoryStick } from "lucide-react";
 import { useContext } from "react";
 import { useAuth } from "@/context/AuthContext";
 import axios from "axios";
+import { API_BASE_URL } from "../config";
 
 const Problems = () => {
     const {user,loading} = useAuth();
@@ -27,7 +28,7 @@ const Problems = () => {
         const fetchProblemsBasedOnUser = async () => {
             try{
                 // console.log(user[0].id);
-                const res = await axios.get(`http://localhost:8000/submissions/${user._id}`,{withCredentials:true});
+                const res = await axios.get(`${API_BASE_URL}/submissions/${user._id}`,{withCredentials:true});
                 console.log(res.data.submissions);
                 if (res.status == 200 && res.data.submissions) {
                     for(let i = 0;i<res.data.submissions.length;i++){

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import { API_BASE_URL } from "../config";
 
 const GithubCallback = () => {
     const navigate = useNavigate();
@@ -13,7 +13,7 @@ const GithubCallback = () => {
 
         if(code){
             const back_callback = async () => {
-                const res = await axios.post(`http://localhost:8000/users/auth/${code}`,{ code: JSON.stringify({code})},{
+                const res = await axios.post(`${API_BASE_URL}/users/auth/${code}`,{ code: JSON.stringify({code})},{
                     withCredentials:true,
                     headers:{
                         'Access-Control-Allow-Origin': '*',

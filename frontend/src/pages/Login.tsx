@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/Label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/Card"
 import { Eye, EyeOff, ArrowLeft, Github } from "lucide-react"
 import axios from "axios"
+import { GITHUB_REDIRECT_URI } from "../config";
 
 const Login = () => {
     const { login } = useAuth();
@@ -16,7 +17,7 @@ const Login = () => {
     const [showPassword,setShowPassword] = useState(false)
     const navigate = useNavigate();
     const GITHUB_CLIENT_ID = "Ov23liZL9Kiq6pk9zkO3";
-    const REDIRECT_URI = "http://localhost:8080/auth/callback";
+    const REDIRECT_URI = GITHUB_REDIRECT_URI;
     const handleGithubLogin = async (e:React.FormEvent) => {
         e.preventDefault()
         // console.log("Login attempt: ", {email,password});

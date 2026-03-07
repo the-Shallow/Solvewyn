@@ -1,6 +1,7 @@
 import axios from "axios";
 import {createContext, useContext, useEffect, useState} from "react";
 import type { ReactNode } from "react";
+import { API_BASE_URL } from "../config";
 
 interface AuthContextType {
     isLoggedIn:boolean;
@@ -19,7 +20,7 @@ export const AuthProvider = ({children} : {children:ReactNode}) => {
     useEffect(()=>{
         const fetchCurrentUser = async () => {
             try{
-                const res = await axios.get("http://localhost:8000/users/me",{withCredentials:true});
+                const res = await axios.get(`${API_BASE_URL}/users/me`,{withCredentials:true});
                 setUser(res.data[0]);
                 setIsLoggedIn(true);
             }catch(err:any){
