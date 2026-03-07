@@ -10,8 +10,6 @@ import { Eye, EyeOff, ArrowLeft, Github } from "lucide-react"
 import axios from "axios"
 import { GITHUB_REDIRECT_URI } from "../config";
 
-console.log(import.meta.env)
-
 
 const Login = () => {
     const { login } = useAuth();
@@ -23,6 +21,7 @@ const Login = () => {
     const REDIRECT_URI = GITHUB_REDIRECT_URI;
     const handleGithubLogin = async (e:React.FormEvent) => {
         e.preventDefault()
+        console.log(import.meta.env)
         // console.log("Login attempt: ", {email,password});
 
         try {
