@@ -10,6 +10,9 @@ import { Eye, EyeOff, ArrowLeft, Github } from "lucide-react"
 import axios from "axios"
 import { GITHUB_REDIRECT_URI } from "../config";
 
+console.log(import.meta.env)
+
+
 const Login = () => {
     const { login } = useAuth();
     const [email,setEmail] = useState("")
