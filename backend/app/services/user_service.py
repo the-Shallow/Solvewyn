@@ -7,6 +7,7 @@ from ..config import settings
 from openai import OpenAI
 from bson.objectid import ObjectId
 import requests
+import httpx
 
 collection = db["users"]
 
@@ -125,3 +126,57 @@ def fetch_user_token(token:str):
             status_code=status.HTTP_400_BAD_REQUEST,
             content={"error":str(e)}
         )
+    
+async def github_exchange(req):
+    if not settings.GITHUB_CLIENT_ID or not settings.GITHUB_CLIENT_SECRET:
+        raise HTTPException(status_code=500, detail="Github OAuth env vars not set.")
+
+    async with httpx.AsyncClient(timeout=20) as client:
+        token_res = await client.post(
+            "https://github.com/login/oauth/access_token",
+            headers={"Accept": "application/json"},
+            json = {
+                "client_id": settings.GITHUB_CLIENT_ID,
+                "client_secret": settings.GITHUB_CLIENT_SECRET,
+                "code": req.code,
+                "redirect_uri": req.redirect_uri,
+            },
+        )
+
+        token_data = token_res.json()
+        access_token = token_data.get("access_token")
+        if not access_token:
+            raise HTTPException(status_code=400, detail="Github token exchange failed.")
+
+        user_res = await client.get(
+            "https://api.github.com/user",
+            headers={
+                "Accept":"application/json",
+                "Authorization": f"Bearer {access_token}"
+            }
+        )
+
+        gh = user_res.json()
+
+        if user_res.status_code != 200 or "id" not in gh:
+            raise HTTPException(status_code=400, detail="Fetching Github user info failed.")
+
+        user_data = {
+            "github_id": str(gh.get("id")),
+            "login": gh.get("login"),
+            "email": gh.get("email"),
+            "name": gh.get("name"),
+            "bio": gh.get("bio"),
+            }
+
+        return {
+            "access_token": access_token,
+            "github": {
+                "id": str(gh.get("id")),
+                "login": gh.get("login"),
+                "email": gh.get("email"),
+                "name": gh.get("name"),
+                "bio": gh.get("bio"),
+            },
+            "user": user_data,
+        }

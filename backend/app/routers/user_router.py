@@ -1,8 +1,13 @@
 from fastapi import APIRouter, Depends,Request
+from pydantic import BaseModel
 from ..services import user_service
 from ..models.user_model import User
 
 router = APIRouter(prefix="/users",tags=["users"])
+
+class GithubExchangeRequest(BaseModel):
+    code: str
+    redirect_uri: str
 
 @router.post("/")
 def create_user(user:User):
@@ -19,3 +24,7 @@ def get_user_by_githubid(github_id):
 @router.post("/auth/{code}")
 def codeToToken(code:str):
     return user_service.exchangeCodeForToken(code)
+
+@router.post("/github/exchange")
+async def github_exchange_endpoint(request:GithubExchangeRequest):
+    return await user_service.github_exchange(request)

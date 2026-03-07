@@ -6,6 +6,7 @@ router = APIRouter(prefix="/submissions",tags=["submissions"])
 
 @router.post("/")
 def create_submission(problem_submission:ProblemSubmission):
+    print("Received submission data:", problem_submission.dict())  # Debugging statement
     return problem_submission_service.create_submission(problem_submission=problem_submission)
 
 @router.get("/{user_id}")

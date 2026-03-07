@@ -25,7 +25,7 @@ const GithubCallback = () => {
                 if(res.status == 200 || res.status == 201){
                     console.log("Login Successfull!");
                     // localStorage.setItem("token",token);
-                    navigate("/problems");
+                    navigate("/");
                 }
             }
 

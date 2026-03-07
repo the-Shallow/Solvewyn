@@ -17,7 +17,7 @@ problem_collection = db["problems"]
 
 def create_submission(problem_submission:ProblemSubmission):
     try:
-
+        print(problem_submission.dict())
         result = submission_collection.insert_one(problem_submission.dict())
         
         if not result or not result.inserted_id:
