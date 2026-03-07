@@ -19,9 +19,9 @@ const Login = () => {
     const navigate = useNavigate();
     const GITHUB_CLIENT_ID = "Ov23liZL9Kiq6pk9zkO3";
     const REDIRECT_URI = GITHUB_REDIRECT_URI;
+    console.log(import.meta.env)
     const handleGithubLogin = async (e:React.FormEvent) => {
         e.preventDefault()
-        console.log(import.meta.env)
         // console.log("Login attempt: ", {email,password});
 
         try {
