@@ -12,6 +12,8 @@ import { GITHUB_REDIRECT_URI } from "../config";
 
 
 const Login = () => {
+    console.log("ENV CHECK:", import.meta.env);
+    console.log("API URL:", import.meta.env.VITE_API_BASE_URL);
     const { login } = useAuth();
     const [email,setEmail] = useState("")
     const [password,setPassword] = useState("")
