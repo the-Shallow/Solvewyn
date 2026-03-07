@@ -2,7 +2,7 @@
 frontend/node_modules/
 frontend/dist/
 frontend/build/
-frontend/.env.*
+frontend/.env
 frontend/*.conf
 
 # Python / Backend
