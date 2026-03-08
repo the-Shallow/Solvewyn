@@ -38,7 +38,7 @@ def create_user(user:User):
             status_code=status.HTTP_201_CREATED,
             content={"message":"User created successfully....","user_id":str(result.inserted_id)}
         ) 
-        response.set_cookie(key="jwt_token",value=jwt_token,httponly=True,secure=False,samesite="lax")
+        response.set_cookie(key="jwt_token",value=jwt_token,httponly=True,secure=True,samesite="none",max_age=3600)
         return response
     except Exception as e:
         print(e)
