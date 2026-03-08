@@ -22,7 +22,7 @@ def create_user(user:User):
                 content={"message":"User already exist on the system....","user_id":existing[0]["_id"]}
             )
             print(jwt_token)
-            response.set_cookie(key="jwt_token",value=jwt_token,httponly=True,secure=False,samesite="lax")
+            response.set_cookie(key="jwt_token",value=jwt_token,httponly=True,secure=True,samesite="none",max_age=3600)
             return response
     
         result = collection.insert_one(user.dict())
