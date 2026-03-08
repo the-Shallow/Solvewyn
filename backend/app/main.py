@@ -6,7 +6,7 @@ app = FastAPI(title="Solvewyen App")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:8080","http://localhost:8000","http://localhost:5173", "https://solvewyn.vercel.app"],
+    allow_origins=["http://localhost:8080","http://localhost:8000","http://localhost:5173", "https://solvewyn.vercel.app", "chrome-extension://ifoekchhfmbpalafhihmbgidoiamaodp"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
